@@ -8,8 +8,11 @@ const botoes = document.querySelectorAll('.app__card-button')
 const musicaFocoInput = document.querySelector('#alternar-musica')
 const musica = new Audio('sons/luna-rise-part-one.mp3')/*musicas em JS ou readFile()*/
 musica.loop = true /*para a musica ficar tocando sem parar*/
+const starPauseBotao = document.querySelector('#start-pause')
+const audioPlay = new Audio('sons/play.wav')
 
 let tempoDecorridoEmSegundos = 5
+let intervaloID = null
 
 
 musicaFocoInput.addEventListener('change', () => { /*change input que usa mais para checkbox*/
@@ -73,4 +76,29 @@ musicaFocoInput.addEventListener('change', () => { /*change input que usa mais p
         default:
             break;
     }
+}
+
+const contagemRegressiva = () => { /*criar funcão dentro de uma constante para colocar um cronometro*/   
+    if(tempoDecorridoEmSegundos <=0){/*quando chegar em 0 parar o temporizador*/
+        zerar() /**/
+        alert('Tempo finalizado!')
+        return
+    }
+    tempoDecorridoEmSegundos -= 1
+    console.log('Temporizador' + tempoDecorridoEmSegundos)
+} 
+
+starPauseBotao.addEventListener('click', iniciarOuPausar)
+
+function iniciarOuPausar() {
+    if(intervaloID){ /*pausar o temporizador*/
+        zerar()
+        return
+    }
+     intervaloID = setInterval (contagemRegressiva,1000)
+}
+
+function zerar(){ /*vai interromper a excecução de algum codigo, pra não fazer numero negativos, zerar o temporizador*/
+    clearInterval(intervaloID)
+    intervaloID = null
 }

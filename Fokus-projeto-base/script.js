@@ -6,6 +6,19 @@ const banner = document.querySelector ( '.app__image')
 const titulo = document.querySelector('.app__title')
 const botoes = document.querySelectorAll('.app__card-button')
 const musicaFocoInput = document.querySelector('#alternar-musica')
+const musica = new Audio('sons/luna-rise-part-one.mp3')/*musicas em JS ou readFile()*/
+musica.loop = true /*para a musica ficar tocando sem parar*/
+
+let tempoDecorridoEmSegundos = 5
+
+
+musicaFocoInput.addEventListener('change', () => { /*change input que usa mais para checkbox*/
+    if(musica.paused) {
+        musica.play()
+    } else {
+        musica.pause()
+    }
+})
 
 
 /*Essencialmente, este código está manipulando a aparência ou o comportamento da página quando os botões específicos são clicados, alterando dinamicamente o valor de um atributo no elemento HTML principal.*/
@@ -33,7 +46,7 @@ const musicaFocoInput = document.querySelector('#alternar-musica')
     /*ClassList fornece métodos que facilitam a adição, remoção e verificação de classes, tornando a manipulação de classes CSS mais eficiente e menos suscetível a erros de programação.*/
     function alterarContexto(contexto){
         botoes.forEach(function (contexto){
-            contexto.classList.remove('active')
+            contexto.classList.remove('active')/* remover a marcação de todos os botões quando acionado ( foco, Descanso ...)*/
 
         })
 

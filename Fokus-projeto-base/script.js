@@ -10,6 +10,9 @@ const musica = new Audio('sons/luna-rise-part-one.mp3')/*musicas em JS ou readFi
 musica.loop = true /*para a musica ficar tocando sem parar*/
 const starPauseBotao = document.querySelector('#start-pause')
 const audioPlay = new Audio('sons/play.wav')
+const audioPause = new Audio('sons/pause.mp3')
+const audioTempoFinalizado = new Audio('sons/beep.mp3')
+const iniciarOuPausarBt = document.querySelector('#start-pause span')
 
 let tempoDecorridoEmSegundos = 5
 let intervaloID = null
@@ -80,25 +83,31 @@ musicaFocoInput.addEventListener('change', () => { /*change input que usa mais p
 
 const contagemRegressiva = () => { /*criar funcão dentro de uma constante para colocar um cronometro*/   
     if(tempoDecorridoEmSegundos <=0){/*quando chegar em 0 parar o temporizador*/
-        zerar() /**/
+     audioTempoFinalizado.play() /*tocar musica quando acabar*/      
         alert('Tempo finalizado!')
+        zerar() /*ela torna o intervalo ID null, depois que o alert aparecer na tela*/
         return
     }
     tempoDecorridoEmSegundos -= 1
-    console.log('Temporizador' + tempoDecorridoEmSegundos)
+    console.log('ID'+ intervaloID)
+    console.log('Tempo' + tempoDecorridoEmSegundos)
 } 
 
 starPauseBotao.addEventListener('click', iniciarOuPausar)
 
 function iniciarOuPausar() {
     if(intervaloID){ /*pausar o temporizador*/
+    audioPause.play();/*tocar musica quando pausa*/
         zerar()
         return
     }
-     intervaloID = setInterval (contagemRegressiva,1000)
+    audioPlay.play();
+     intervaloID = setInterval (contagemRegressiva,1000) /*SetInterval = 1 parametro: qual metodo sera excecutado 2 º por quanto tempo será executado*/
+     iniciarOuPausarBt.textContent = "Pausar"/*colocar nome Pausar quando iniciar o contador*/
 }
 
 function zerar(){ /*vai interromper a excecução de algum codigo, pra não fazer numero negativos, zerar o temporizador*/
-    clearInterval(intervaloID)
+    clearInterval(intervaloID) /*clearInterval para interromper a execução do código;*/
+    iniciarOuPausarBt.textContent = "Começar" /*colocar palavra começar depois de iniciado a contagem*/
     intervaloID = null
 }

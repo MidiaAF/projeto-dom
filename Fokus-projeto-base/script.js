@@ -8,7 +8,7 @@ const botoes = document.querySelectorAll('.app__card-button')
 const musicaFocoInput = document.querySelector('#alternar-musica')
 const musica = new Audio('sons/luna-rise-part-one.mp3')/*musicas em JS ou readFile()*/
 musica.loop = true /*para a musica ficar tocando sem parar*/
-const starPauseBotao = document.querySelector('#start-pause')
+const startPauseBt = document.querySelector('#start-pause')
 const audioPlay = new Audio('sons/play.wav')
 const audioPause = new Audio('sons/pause.mp3')
 const audioTempoFinalizado = new Audio('sons/beep.mp3')
@@ -93,7 +93,7 @@ const contagemRegressiva = () => { /*criar funcão dentro de uma constante para 
     console.log('Tempo' + tempoDecorridoEmSegundos)
 } 
 
-starPauseBotao.addEventListener('click', iniciarOuPausar)
+startPauseBt.addEventListener('click', iniciarOuPausar)
 
 function iniciarOuPausar() {
     if(intervaloID){ /*pausar o temporizador*/
@@ -102,7 +102,7 @@ function iniciarOuPausar() {
         return
     }
     audioPlay.play();
-     intervaloID = setInterval (contagemRegressiva,1000) /*SetInterval = 1 parametro: qual metodo sera excecutado 2 º por quanto tempo será executado*/
+     intervaloID = setInterval (contagemRegressiva,1000) /*SetInterval = 1 parametro: qual metodo sera excecutado 2º por quanto tempo será executado*/
      iniciarOuPausarBt.textContent = "Pausar"/*colocar nome Pausar quando iniciar o contador*/
 }
 

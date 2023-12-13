@@ -13,8 +13,9 @@ const audioPlay = new Audio('sons/play.wav')
 const audioPause = new Audio('sons/pause.mp3')
 const audioTempoFinalizado = new Audio('sons/beep.mp3')
 const iniciarOuPausarBt = document.querySelector('#start-pause span')
+const tempoNaTela = document.querySelector('#timer')/**/
 
-let tempoDecorridoEmSegundos = 5
+let tempoDecorridoEmSegundos = 1500  /*25min*/
 let intervaloID = null
 
 
@@ -89,8 +90,8 @@ const contagemRegressiva = () => { /*criar funcão dentro de uma constante para 
         return
     }
     tempoDecorridoEmSegundos -= 1
-    console.log('ID'+ intervaloID)
-    console.log('Tempo' + tempoDecorridoEmSegundos)
+    mostrarTempo()
+   
 } 
 
 startPauseBt.addEventListener('click', iniciarOuPausar)
@@ -111,3 +112,11 @@ function zerar(){ /*vai interromper a excecução de algum codigo, pra não faze
     iniciarOuPausarBt.textContent = "Começar" /*colocar palavra começar depois de iniciado a contagem*/
     intervaloID = null
 }
+
+function mostrarTempo(){ /*colocando o tempo na tela*/
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000)
+    const tempoFormatado = tempo.toLocaleDateString('pt-br', {minute:'2-digit', second:'2-digit'}) /*date.toLocaleDateString()é usado para converter uma data em uma string.*/
+    tempoNaTela.innerHTML = `${tempoFormatado}`
+}
+
+mostrarTempo() /*deixar fixo o tempo na tela*/

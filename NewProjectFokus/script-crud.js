@@ -3,31 +3,32 @@
 const btnAdicionarTarefa = document.querySelector('.app__button--add-task')/*bt de adicionar tarefa */
 const formAdicionarTarefa = document.querySelector('.app__form-add-task') /*formulário adicionar tarefa*/
 const textArea = document.querySelector('.app__form-textarea') /*interagir com o que o usuário digitou */
+const ulTarefas = document.querySelector('.app__section-task-list')
 
-const adicionarTarefa = document.querySelector('.')
-
-const tarefas = JASON.parse(localStorage.getItem('tarefas')) // Esta é a nossa lista (ou array) de tarefas. Ela começa vazia porque ainda não adicionamos nenhuma tarefa.
+const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [] // Esta é a nossa lista (ou array) de tarefas. Ela começa vazia porque ainda não adicionamos nenhuma tarefa.
 
 //Para criar a função, digitamos function seguido do nome da função criarElementoTarefa(). Entre os parênteses, podemos receber tarefa como parâmetro, pois precisamos saber qual tarefa queremos criar.
 function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
     const li = document.createElement('li') /*criar elemento de lista */
     li.classList.add('app__section-task-list-item')/*acessar a  lista que acabou de criar */
     const svg = document.createElement('svg') /*adicinar class CSS */
-    svg.innerHTML = `
-    <svg>
+    svg.innerHTML = ` 
         <svg class="app_section-task-icon-status" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="12" fill="#FFF"></circle>
             <path d="M9 16.1719L19.5938 5.57812L21 6.98438L9 18.9844L3.42188 13.4062L4.82812 12L9 16.1719Z" fill="#01080E"></path>
         </svg>
-    </svg>
+    
     `
     const paragrafo = document.createElement('p')
     paragrafo.textContent = tarefa.descricao // receber as informações digitadas 
+    paragrafo.classList.add('app_section-task-list-item-description')
 
     const botao = document.createElement('button')
+    botao.classList.add('app_button-edit')
+
     const imagemBotao = document.createElement('img')
     
-    imagemBotao.setAttribute('src','/imagens/edit.png'  )// definir pra onde a imagem aponta 
+    imagemBotao.setAttribute('src','/imagenscopy/edit.png'  )// definir pra onde a imagem aponta 
 
     botao.append(imagemBotao)//coloca ai dentro (imagem ) Ele pode aceitar vários argumentos e adicionar cada um deles como um filho do elemento ao qual o método é aplicado
     
@@ -35,6 +36,7 @@ function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
     li.append(paragrafo)
     li.append(botao)
 
+    return li
 
 }
 
@@ -51,9 +53,16 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {/*quando alguem digi
         descricao: textArea.value /*valor digitado textarea e guardar dentro de um object */
     }
     tarefas.push(tarefa)/*colocar dentro array as tarefa lista com todas as tarefas  sendo geridas pelo fokus*/
+    const elementoTarefa =criarElementoTarefa(tarefa)
+    ulTarefas.append(elementoTarefa)
     localStorage.setItem('tarefas', JSON.stringify(tarefas))//Convertendo o array para uma string em formato JSON para poder armazenar. 
-    
+    textArea.value = ''
+    formAdicionarTarefa.classList.add('hidden')
 })
+tarefas.forEach(tarefa =>{
+    const elementoTarefa = criarElementoTarefa(tarefa)
+    ulTarefas.append(elementoTarefa)
+});
 
 
 
@@ -74,4 +83,11 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {/*quando alguem digi
         <img src="/imagens/edit.png">
     </button>
   </li>
-`;*/
+`;
+
+
+
+
+const adicionarTarefa = document.querySelector('.')
+
+*/

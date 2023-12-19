@@ -13,10 +13,10 @@ function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
     li.classList.add('app__section-task-list-item')/*acessar a  lista que acabou de criar */
     const svg = document.createElement('svg') /*adicinar class CSS */
     svg.innerHTML = ` 
-        <svg class="app_section-task-icon-status" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="12" fill="#FFF"></circle>
-            <path d="M9 16.1719L19.5938 5.57812L21 6.98438L9 18.9844L3.42188 13.4062L4.82812 12L9 16.1719Z" fill="#01080E"></path>
-        </svg>
+     <svg class="app__section-task-icon-status" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="12" fill="#FFF"></circle>
+    <path d="M9 16.1719L19.5938 5.57812L21 6.98438L9 18.9844L3.42188 13.4062L4.82812 12L9 16.1719Z" fill="#01080E"></path>
+    </svg>
     
     `
     const paragrafo = document.createElement('p')
@@ -28,7 +28,7 @@ function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
 
     const imagemBotao = document.createElement('img')
     
-    imagemBotao.setAttribute('src','/imagenscopy/edit.png'  )// definir pra onde a imagem aponta 
+    imagemBotao.setAttribute('src','./imagenscopy/edit.png'  )// definir pra onde a imagem aponta 
 
     botao.append(imagemBotao)//coloca ai dentro (imagem ) Ele pode aceitar vários argumentos e adicionar cada um deles como um filho do elemento ao qual o método é aplicado
     

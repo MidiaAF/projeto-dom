@@ -5,7 +5,7 @@ const formAdicionarTarefa = document.querySelector('.app__form-add-task') /*form
 const textArea = document.querySelector('.app__form-textarea') /*interagir com o que o usuário digitou */
 const ulTarefas = document.querySelector('.app__section-task-list')
 
-const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [] // Esta é a nossa lista (ou array) de tarefas. Ela começa vazia porque ainda não adicionamos nenhuma tarefa.
+const listasDeTarefas = JSON.parse(localStorage.getItem('tarefas')) || [] // Esta é a nossa lista (ou array) de tarefas. Ela começa vazia porque ainda não adicionamos nenhuma tarefa.
 
 //Para criar a função, digitamos function seguido do nome da função criarElementoTarefa(). Entre os parênteses, podemos receber tarefa como parâmetro, pois precisamos saber qual tarefa queremos criar.
 function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
@@ -52,14 +52,14 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {/*quando alguem digi
     const tarefa = { //identifica a tarefa que esta cadastrando no momento na textearea
         descricao: textArea.value /*valor digitado textarea e guardar dentro de um object */
     }
-    tarefas.push(tarefa)/*colocar dentro array as tarefa lista com todas as tarefas  sendo geridas pelo fokus*/
+    listasDeTarefas.push(tarefa)/*colocar dentro array as tarefa lista com todas as tarefas  sendo geridas pelo fokus*/
     const elementoTarefa =criarElementoTarefa(tarefa)
     ulTarefas.append(elementoTarefa)
-    localStorage.setItem('tarefas', JSON.stringify(tarefas))//Convertendo o array para uma string em formato JSON para poder armazenar. 
+    localStorage.setItem('tarefas', JSON.stringify(listasDeTarefas))//Convertendo o array para uma string em formato JSON para poder armazenar. 
     textArea.value = ''
     formAdicionarTarefa.classList.add('hidden')
 })
-tarefas.forEach(tarefa =>{
+listasDeTarefas.forEach(tarefa => {
     const elementoTarefa = criarElementoTarefa(tarefa)
     ulTarefas.append(elementoTarefa)
 });

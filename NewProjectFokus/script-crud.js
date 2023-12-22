@@ -19,7 +19,8 @@ function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
     </svg>
     
     `
-    const paragrafo = document.createElement('p')
+    /// trasnformando HTML em tarefas
+    const paragrafo = document.createElement('p') 
     paragrafo.textContent = tarefa.descricao // receber as informações digitadas 
     paragrafo.classList.add('app_section-task-list-item-description')
 
@@ -36,7 +37,7 @@ function criarElementoTarefa(tarefa){ /*recebe tarefa e devolve html*/
     li.append(paragrafo)
     li.append(botao)
 
-    return li
+    return li // criar elemento e retorna  linha foreach
 
 }
 
@@ -56,12 +57,12 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {/*quando alguem digi
     const elementoTarefa =criarElementoTarefa(tarefa)
     ulTarefas.append(elementoTarefa)
     localStorage.setItem('tarefas', JSON.stringify(listasDeTarefas))//Convertendo o array para uma string em formato JSON para poder armazenar. 
-    textArea.value = ''
-    formAdicionarTarefa.classList.add('hidden')
+    textArea.value = ''// limpar textarea 
+    formAdicionarTarefa.classList.add('hidden') // esconder o formulário 
 })
-listasDeTarefas.forEach(tarefa => {
+listasDeTarefas.forEach(tarefa => { // para cada tarefa percorrida, chamar a função criar elemento da tarefa
     const elementoTarefa = criarElementoTarefa(tarefa)
-    ulTarefas.append(elementoTarefa)
+    ulTarefas.append(elementoTarefa) // ul index html
 });
 
 
